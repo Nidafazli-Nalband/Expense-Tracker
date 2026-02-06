@@ -1,22 +1,25 @@
-# Expense Tracker Dashboard
+# ExpensePulse 💸
 
-A fully frontend-based Expense Tracker built using HTML, CSS, and JavaScript.
+A modern, fully client-side expense tracker dashboard built using **HTML, CSS, and JavaScript**.
 
 ## Features
-- Add & delete expenses
-- Category-wise expense chart
-- Dashboard summary cards
-- Local storage persistence
-- Works offline
-- No backend required
-
-## How to Run
-1. Download the project
-2. Open `index.html` in any browser
-3. Start tracking expenses
+- Add and delete expenses
+- Category-wise expense breakdown chart
+- Real-time balance updates
+- LocalStorage persistence
+- Responsive dashboard layout
+- Works by opening `index.html` directly
 
 ## Tech Stack
-- HTML
-- CSS
-- JavaScript
+- HTML5
+- CSS3 (Modern UI)
+- Vanilla JavaScript
 - Chart.js
+
+## How to Run
+1. Download or clone the repository
+2. Open `index.html` in your browser
+3. Start tracking expenses 🚀
+
+## License
+MIT

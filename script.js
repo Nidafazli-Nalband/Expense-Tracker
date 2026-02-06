@@ -1,34 +1,27 @@
 let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-let chart;
 
-function addExpense() {
-  const title = document.getElementById("title").value;
-  const amount = document.getElementById("amount").value;
-  const category = document.getElementById("category").value;
+const list = document.getElementById("list");
+const incomeEl = document.getElementById("income");
+const expenseEl = document.getElementById("expense");
+const balanceEl = document.getElementById("balance");
 
-  if (!title || !amount) return alert("Fill all fields");
+const ctx = document.getElementById("chart");
 
-  expenses.push({ title, amount: Number(amount), category });
-  localStorage.setItem("expenses", JSON.stringify(expenses));
+let chart = new Chart(ctx, {
+  type: "doughnut",
+  data: {
+    labels: [],
+    datasets: [{
+      data: [],
+      backgroundColor: ["#6366f1","#22d3ee","#22c55e","#f59e0b","#ef4444"]
+    }]
+  }
+});
 
-  document.getElementById("title").value = "";
-  document.getElementById("amount").value = "";
-
-  render();
-}
-
-function deleteExpense(index) {
-  expenses.splice(index, 1);
-  localStorage.setItem("expenses", JSON.stringify(expenses));
-  render();
-}
-
-function render() {
-  const list = document.getElementById("list");
+function update() {
   list.innerHTML = "";
-
   let total = 0;
-  const categories = {};
+  let categories = {};
 
   expenses.forEach((e, i) => {
     total += e.amount;
@@ -37,39 +30,42 @@ function render() {
     list.innerHTML += `
       <tr>
         <td>${e.title}</td>
-        <td>₹${e.amount}</td>
         <td>${e.category}</td>
-        <td><button class="delete" onclick="deleteExpense(${i})">X</button></td>
+        <td>₹${e.amount}</td>
+        <td><button class="delete" onclick="remove(${i})">✕</button></td>
       </tr>
     `;
   });
 
-  document.getElementById("total").innerText = `₹${total}`;
-  document.getElementById("count").innerText = expenses.length;
+  incomeEl.textContent = "₹0";
+  expenseEl.textContent = "₹" + total;
+  balanceEl.textContent = "₹" + (-total);
 
-  drawChart(categories);
+  chart.data.labels = Object.keys(categories);
+  chart.data.datasets[0].data = Object.values(categories);
+  chart.update();
+
+  localStorage.setItem("expenses", JSON.stringify(expenses));
 }
 
-function drawChart(data) {
-  const ctx = document.getElementById("chart");
-  if (chart) chart.destroy();
+function addExpense() {
+  const title = document.getElementById("title").value;
+  const amount = +document.getElementById("amount").value;
+  const category = document.getElementById("category").value;
 
-  chart = new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: Object.keys(data),
-      datasets: [{
-        data: Object.values(data),
-        backgroundColor: [
-          "#1abc9c",
-          "#3498db",
-          "#9b59b6",
-          "#f1c40f",
-          "#e74c3c"
-        ]
-      }]
-    }
-  });
+  if (!title || amount <= 0) return;
+
+  expenses.push({ title, amount, category });
+
+  document.getElementById("title").value = "";
+  document.getElementById("amount").value = "";
+
+  update();
 }
 
-render();
+function remove(index) {
+  expenses.splice(index, 1);
+  update();
+}
+
+update();

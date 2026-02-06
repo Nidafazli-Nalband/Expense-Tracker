@@ -1,57 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ExpensePulse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
-  <div class="dashboard">
-    <header>
-      <h1>Expense Tracker</h1>
-      <p>Personal finance overview</p>
-    </header>
 
-    <section class="stats">
-      <div class="stat-card">
-        <span>Total Expenses</span>
-        <h2 id="total">₹0</h2>
-      </div>
-      <div class="stat-card">
-        <span>Transactions</span>
-        <h2 id="count">0</h2>
-      </div>
-    </section>
+<div class="app">
+  <header>
+    <h1>ExpensePulse</h1>
+    <p>Track. Analyze. Control your money.</p>
+  </header>
 
-    <section class="panel">
-      <h3>Add Expense</h3>
-      <div class="form">
-        <input type="text" id="title" placeholder="Title">
-        <input type="number" id="amount" placeholder="Amount">
-        <select id="category">
-          <option>Food</option>
-          <option>Transport</option>
-          <option>Shopping</option>
-          <option>Bills</option>
-          <option>Other</option>
-        </select>
-        <button onclick="addExpense()">Add</button>
-      </div>
-    </section>
+  <!-- STATS -->
+  <section class="stats">
+    <div class="card income">
+      <span>Income</span>
+      <h2 id="income">₹0</h2>
+    </div>
+    <div class="card expense">
+      <span>Expenses</span>
+      <h2 id="expense">₹0</h2>
+    </div>
+    <div class="card balance">
+      <span>Balance</span>
+      <h2 id="balance">₹0</h2>
+    </div>
+  </section>
 
-    <section class="panel">
-      <h3>Spending Breakdown</h3>
-      <canvas id="chart"></canvas>
-    </section>
+  <!-- ADD EXPENSE -->
+  <section class="panel">
+    <h3>Add Expense</h3>
+    <div class="form">
+      <input type="text" id="title" placeholder="Expense title" />
+      <input type="number" id="amount" placeholder="Amount" />
+      <select id="category">
+        <option>Food</option>
+        <option>Travel</option>
+        <option>Shopping</option>
+        <option>Bills</option>
+        <option>Other</option>
+      </select>
+      <button onclick="addExpense()">Add</button>
+    </div>
+  </section>
 
-    <section class="panel">
-      <h3>Expense History</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="list"></tbody>
-      </table>
-    </section>
-  </div>
+  <!-- CHART -->
+  <section class="panel">
+    <h3>Expense Breakdown</h3>
+    <canvas id="chart"></canvas>
+  </section>
 
-  <script src="script.js"></script>
+  <!-- LIST -->
+  <section class="panel">
+    <h3>Recent Expenses</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+  </section>
+</div>
+
+<script src="script.js"></script>
 </body>
+</html>
