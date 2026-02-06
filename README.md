@@ -21,5 +21,4 @@ A modern, fully client-side expense tracker dashboard built using **HTML, CSS, a
 2. Open `index.html` in your browser
 3. Start tracking expenses 🚀
 
-## License
-MIT
+
